@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt">
 {% load static %}
 <head>
   <meta charset="UTF-8">
@@ -19,7 +20,7 @@ div.search {
   display: flex;
 }
 
-input.searchTerm {
+input.searchTerm, select.searchTerm {
   width: 100%;
   border: 3px solid #00B4CC;
   border-right: none;
@@ -31,137 +32,88 @@ input.searchTerm {
   font-size: 20px;
 }
 
-select.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 36px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-  font-size: 20px;
-}
-
-input.searchTerm:focus{
+input.searchTerm:focus, select.searchTerm:focus{
   color: #00B4CC;
 }
 
 button.searchButton {
-  width: 80px;
-  height: 36px;
+  width: 100%;
+  height: 45px;
   border: 1px solid #00B4CC;
   background: #00B4CC;
   text-align: center;
   color: #fff;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 20px;
+  font-weight: bold;
 }
 
 div.wrap{
-  width: 60%;
-  position: relative;
+  width: 50%;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
-body.bg-image {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 300px;
-    max-height: 700px;
-}
-
-.bg-image[style^="background-image:"][style$=".svg)"] {
-  background-size: 400px 300px;
-  background-image: url(https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg)
+h2.result-text {
+  text-align: center;
+  color: #ee2d14;
+  margin-top: 20px;
 }
 </style>
 </head>
-<body> {% comment %} https://www.svgbackgrounds.com/ -> this site is good for bg images {% endcomment %}
+<body>
 <div class="wrap">
   <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
-   <div class="search">
-      <input name="Name" type="text" class="searchTerm" placeholder="Type your Car's Name here">
+      
+      <div class="search">
+      <input name="year" type="number" class="searchTerm" placeholder="Manufacturing Year (e.g., 2018)" required>
    </div>
     <br>
       <div class="search">
-      <input name="year" type="text" class="searchTerm" placeholder="Manufacturing Year">
-   </div>
-    <br>
-      <div class="search">
-      <input name="km" type="text" class="searchTerm" placeholder="Km Driven">
+      <input name="km_driven" type="number" class="searchTerm" placeholder="Km Driven (e.g., 45000)" required>
    </div>
    <br>
       <div class="search">
-      <select name="fuel" class="searchTerm">
-        <option selected>Fuel required by Car</option>
-        <option value="1">Petrol</option>
-        <option value="0">Diesel</option>
-        <option value="-1">CNG</option>
-        <option value="-1">LPG</option>
+      <select name="fuel" class="searchTerm" required>
+        <option value="" disabled selected>Fuel Type</option>
+        <option value="0">Petrol (Gasolina)</option>
+        <option value="1">Diesel</option>
+        <option value="2">CNG (GNV)</option>
+        <option value="3">LPG (GPL)</option>
     </select>
    </div>
     <br>
       <div class="search">
-      <select name="dealer" class="searchTerm">
-        <option selected>Dealer Type</option>
-        <option value="1">Individual</option>
-        <option value="0">Dealer</option>
-        <option value="-1">Other</option>
+      <select name="seller_type" class="searchTerm" required>
+        <option value="" disabled selected>Dealer Type</option>
+        <option value="0">Individual (Particular)</option>
+        <option value="1">Dealer (Stand)</option>
     </select>
    </div>
    <br>
       <div class="search">
-      <select name="trans" class="searchTerm">
-        <option selected>Transmission type</option>
-        <option value="1">Manual</option>
-        <option value="0">Automated</option>
+      <select name="transmission" class="searchTerm" required>
+        <option value="" disabled selected>Transmission type</option>
+        <option value="0">Manual</option>
+        <option value="1">Automated (Automática)</option>
     </select>
    </div>
     <br>
-      <div class="search">
-      <input name="seats" type="text" class="searchTerm" placeholder="Number of seats">
-   </div>
-    <br>
-      <div class="search">
-      <input name="rpm" type="text" class="searchTerm" placeholder="Torque in rpm">
-   </div>
-     <br>
-      <div class="search">
-      <input name="mil" type="text" class="searchTerm" placeholder="Mileage of the car">
-   </div>
-    <br>
-      <div class="search">
-      <input name="eng" type="text" class="searchTerm" placeholder="Engine power in cc">
-   </div>
-   <br>
-      <div class="search">
-      <input name="power" type="text" class="searchTerm" placeholder="Max power range (32 - 400)">
-   </div>
-   <br>
-      <div class="search">
-      <select name="owner" class="searchTerm">
-        <option selected>Ownership</option>
-        <option value="1">First Owner</option>
-        <option value="2">Second Owner</option>
-        <option value="3">Third Owner</option>
-        <option value="4">Fourth and Above owner</option>
-        <option value="5">Test Drive Vehicle</option>
-    </select>
-   </div>
 
-      <button type="submit" name="pred_button" class="searchButton"> Submit
-        <i class="fa fa-search"></i>
-     </button>
+      <button type="submit" name="pred_button" class="searchButton"> Submit Predict </button>
    </form>
-   {% if response %}
-      <h2>The Selling Price is: {{ response }}</h2>
-    {% endif %}
+   
+   {% if prediction %}
+      <h2 class="result-text">The Selling Price is: R$ {{ prediction }}</h2>
+   {% endif %}
 </div>
 
 </body>
