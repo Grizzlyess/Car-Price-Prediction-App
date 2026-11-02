@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import predict_price
+from .views import index_func
 
 urlpatterns = [
-    path('', predict_price, name='predict_price'),
+    path('', index_func, name='homepage'),
 ]
