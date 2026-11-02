@@ -1,6 +1,6 @@
 # Car Price Prediction App
 
-###  Disponível em: 
+### Disponível em: 
 ```bash
 https://car-price-prediction-app-3iww.onrender.com/
 ```
@@ -11,17 +11,16 @@ O foco deste repositório é demonstrar o ciclo completo de desenvolvimento em I
 
 ## Tecnologias Utilizadas
 
-*   **Machine Learning:** Python, Scikit-Learn (Random Forest Regressor), Pandas, NumPy
-*   **Framework Web:** Django, HTML5, CSS3
-*   **Deploy & Infraestrutura:** Git, GitHub, Heroku
+* **Machine Learning:** Python, Scikit-Learn (Random Forest Regressor), Pandas, NumPy
+* **Framework Web:** Django, HTML5, CSS3
+* **Deploy & Infraestrutura:** Git, GitHub, Render, Gunicorn
 
 ## Arquitetura do Projeto
 
 O sistema está dividido em três fases principais:
-1.  **Modelação Preditiva:** Limpeza de dados, engenharia de atributos (*feature engineering*) e treino de um modelo de regressão baseado em árvores de decisão.
-2.  **Aplicação Web (Django):** Um sistema web integrado que carrega o modelo treinado para a memória, processa os inputs introduzidos pelo utilizador e devolve a estimativa de preço em tempo real.
-3.  **Implementação (Deployment):** Configuração de dependências, variáveis de ambiente e ficheiros de configuração para publicação em nuvem via GitHub e Heroku.
-
+1. **Modelação Preditiva:** Limpeza de dados, engenharia de atributos (*feature engineering*) e treino de um modelo de regressão baseado em árvores de decisão.
+2. **Aplicação Web (Django):** Um sistema web integrado que carrega o modelo treinado para a memória, processa os inputs introduzidos pelo utilizador e devolve a estimativa de preço em tempo real.
+3. **Implementação (Deployment):** Configuração de dependências, servidores WSGI (Gunicorn) e variáveis de ambiente para publicação em nuvem via GitHub e Render.
 
 ## Como Executar o Projeto Localmente
 
@@ -58,9 +57,5 @@ Aceda à aplicação no seu navegador através de: **http://127.0.0.1:8000/**
 
 ## Metodologia de Machine Learning
 
-*   **Algoritmia:** Utilizou-se o `RandomForestRegressor`, um modelo de ensemble altamente eficaz para lidar com relações não-lineares entre as variáveis dos veículos e o preço de mercado.
-*   **Extração de Atributos:** Focou-se numa fase robusta de transformação de dados e engenharia de atributos em vez de análises exploratórias complexas, otimizando o poder preditivo do regressor.
-
-## Próximos Passos (Roadmap)
-*   [ ] Conteinerizar a aplicação utilizando Docker para garantir portabilidade.
-*   [ ] Substituir o modelo atual por pipelines automatizados com otimização de hiperparâmetros.
+* **Algoritmia:** Utilizou-se o `RandomForestRegressor`, um modelo de ensemble altamente eficaz para lidar com relações não-lineares entre as variáveis dos veículos e o preço de mercado.
+* **Extração de Atributos:** Focou-se numa fase robusta de transformação de dados e engenharia de atributos em vez de análises exploratórias complexas, otimizando o poder preditivo do regressor.
