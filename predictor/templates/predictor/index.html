@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title>Car Selling Price Prediction</title>
+<style>
+body {
+    background-image: url("https://i.pinimg.com/736x/0b/c4/59/0bc459136312f8bd9eb22d03ffed7f54.jpg"); /* Exemplo de imagem de carro da Unsplash */
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+div.field-group {
+  margin-bottom: 18px;
+}
+
+input.searchTerm, select.searchTerm {
+  width: 100%;
+  border: 2px solid #00B4CC;
+  padding: 8px 12px;
+  height: 42px;
+  border-radius: 6px;
+  outline: none;
+  color: #333;
+  font-size: 15px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+input.searchTerm:focus, select.searchTerm:focus {
+  border-color: #008b9c;
+  box-shadow: 0 0 5px rgba(0, 180, 204, 0.4);
+}
+
+button.searchButton {
+  width: 100%;
+  height: 48px;
+  border: none;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+button.searchButton:hover {
+  background: #008b9c;
+}
+
+div.wrap{
+  width: 480px;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.3);
+}
+
+h2.result-text {
+  text-align: center;
+  color: #ee2d14;
+  margin-top: 25px;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form method="post" action="">
+    {% csrf_token %}
+      
+      <div class="field-group">
+        <input name="year" type="number" class="searchTerm" placeholder="Manufacturing Year (e.g., 2018)" required>
+      </div>
+      <div class="field-group">
+        <input name="km_driven" type="number" class="searchTerm" placeholder="Km Driven (e.g., 45000)" required>
+      </div>
+      <div class="field-group">
+        <select name="fuel" class="searchTerm" required>
+          <option value="" disabled selected>Fuel Type</option>
+          <option value="1">Petrol</option>
+          <option value="0">Diesel</option>
+          <option value="-1">CNG</option>
+          <option value="-1">LPG</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <select name="dealer" class="searchTerm" required>
+          <option value="" disabled selected>Dealer Type</option>
+          <option value="1">Individual</option>
+          <option value="0">Dealer</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <select name="trans" class="searchTerm" required>
+          <option value="" disabled selected>Transmission Type</option>
+          <option value="1">Manual</option>
+          <option value="0">Automated</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <input name="seats" type="number" class="searchTerm" placeholder="Number of Seats (e.g., 5)">
+      </div>
+      <div class="field-group">
+        <input name="mil" type="text" class="searchTerm" placeholder="Mileage (e.g., 18.9)">
+      </div>
+      <div class="field-group">
+        <input name="eng" type="number" class="searchTerm" placeholder="Engine cc (e.g., 1248)">
+      </div>
+      <div class="field-group">
+        <input name="power" type="text" class="searchTerm" placeholder="Max Power (e.g., 88.5)">
+      </div>
+      <div class="field-group">
+        <select name="owner" class="searchTerm" required>
+          <option value="" disabled selected>Ownership</option>
+          <option value="1">First Owner</option>
+          <option value="2">Second Owner</option>
+          <option value="3">Third Owner</option>
+          <option value="4">Fourth and Above</option>
+        </select>
+      </div>
+
+      <button type="submit" name="pred_button" class="searchButton">Submit Predict</button>
+   </form>
+   
+   {% if prediction %}
+      <h2 class="result-text">The Selling Price is: R$ {{ prediction }}</h2>
+   {% endif %}
+</div>
+</body>
+</html>
